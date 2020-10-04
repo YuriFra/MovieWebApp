@@ -52,7 +52,7 @@ namespace MovieApp.Pages.Movies
             }
             Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
             Movie = await movies.ToListAsync();
-            Movie = Movie.OrderByDescending(date => date.ReleaseDate).ToList();
+            Movie = Movie.OrderBy(name => name.Title).ToList();
         }
     }
 }
