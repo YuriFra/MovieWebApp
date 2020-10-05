@@ -15,7 +15,7 @@
                 <option value="">All</option>
             </select>
             Title: <input type="text" asp-for="SearchString"/>
-            <input type="submit" class="btn btn-success" value="Search"/>
+            <input type="submit" class="btn btn-outline-secondary" value="Search"/>
         </p>
     </form>
 </div>
@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td class="ml-5">
-                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> 
-                <a asp-page="./Details" asp-route-id="@item.Id" class="ml-1 btn btn-success">Details</a> 
-                <a asp-page="./Delete" asp-route-id="@item.Id" class="ml-1 btn btn-danger">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                <a asp-page="./Details" asp-route-id="@item.Id" class="ml-1 btn btn-outline-success">Details</a> 
+                <a asp-page="./Delete" asp-route-id="@item.Id" class="ml-1 btn btn-outline-danger">Delete</a>
             </td>
         </tr>
 }

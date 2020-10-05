@@ -28,7 +28,7 @@ namespace MovieApp
             services.AddRazorPages();
 
             services.AddDbContext<MovieContext>(options =>
-                    options.UseSqlite(Configuration.GetConnectionString("MovieContext")));
+                    options.UseMySQL(Configuration.GetConnectionString("MovieContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +37,7 @@ namespace MovieApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
