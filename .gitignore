@@ -30,3 +30,7 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+!/appsettings.json
+!/appsettings.json
+Pages/UploadFile.cshtml.cs
+wwwroot/Images/
