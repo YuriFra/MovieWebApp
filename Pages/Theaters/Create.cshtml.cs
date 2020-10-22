@@ -5,30 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using MovieApp.Data;
 using MovieApp.Models;
 
-namespace MovieApp.Pages.Movies
+namespace MovieApp.Pages.Theaters
 {
     public class CreateModel : PageModel
     {
-        private readonly MovieContext _context;
+        private readonly MovieApp.Data.MovieContext _context;
 
-        public CreateModel(MovieContext context)
+        public CreateModel(MovieApp.Data.MovieContext context)
         {
             _context = context;
         }
-        
+
         public IActionResult OnGet()
-        { 
-            ViewData["TheaterList"] = new SelectList(_context.Theater, "TheaterId", "Name");
-            
+        {
             return Page();
         }
 
         [BindProperty]
-        public Movie Movie { get; set; }
+        public Theater Theater { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -38,8 +35,10 @@ namespace MovieApp.Pages.Movies
             {
                 return Page();
             }
-            _context.Movie.Add(Movie);
+
+            _context.Theater.Add(Theater);
             await _context.SaveChangesAsync();
+
             return RedirectToPage("./Index");
         }
     }

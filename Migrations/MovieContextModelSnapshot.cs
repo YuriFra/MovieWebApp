@@ -29,10 +29,13 @@ namespace MovieApp.Migrations
                         .HasMaxLength(20);
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime");
+
+                    b.Property<int?>("TheaterId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -41,7 +44,40 @@ namespace MovieApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TheaterId");
+
                     b.ToTable("Movie");
+                });
+
+            modelBuilder.Entity("MovieApp.Models.Theater", b =>
+                {
+                    b.Property<int>("TheaterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StreetNumber")
+                        .HasColumnType("text");
+
+                    b.HasKey("TheaterId");
+
+                    b.ToTable("Theater");
+                });
+
+            modelBuilder.Entity("MovieApp.Models.Movie", b =>
+                {
+                    b.HasOne("MovieApp.Models.Theater", "Theater")
+                        .WithMany("Movies")
+                        .HasForeignKey("TheaterId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 #pragma warning restore 612, 618
         }

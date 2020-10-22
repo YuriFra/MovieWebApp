@@ -15,6 +15,15 @@ namespace MovieApp.Data
             }
     
             public DbSet<Movie> Movie { get; set; }
+            public DbSet<Theater> Theater { get; set; }
+            
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                modelBuilder.Entity<Theater>()
+                    .HasMany(m => m.Movies)
+                    .WithOne(t => t.Theater)
+                    .OnDelete(DeleteBehavior.SetNull);
+            }
         }
 }
     

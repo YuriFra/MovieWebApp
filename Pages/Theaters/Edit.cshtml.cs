@@ -9,18 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using MovieApp.Data;
 using MovieApp.Models;
 
-namespace MovieApp.Pages.Movies
+namespace MovieApp.Pages.Theaters
 {
     public class EditModel : PageModel
     {
-        private readonly MovieContext _context;
-        public EditModel(MovieContext context)
+        private readonly MovieApp.Data.MovieContext _context;
+
+        public EditModel(MovieApp.Data.MovieContext context)
         {
             _context = context;
         }
-        public IList<Theater> Theaters { get; set; }
+
         [BindProperty]
-        public Movie Movie { get; set; }
+        public Theater Theater { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,9 +30,9 @@ namespace MovieApp.Pages.Movies
                 return NotFound();
             }
 
-            Movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
+            Theater = await _context.Theater.FirstOrDefaultAsync(m => m.TheaterId == id);
 
-            if (Movie == null)
+            if (Theater == null)
             {
                 return NotFound();
             }
@@ -47,7 +48,7 @@ namespace MovieApp.Pages.Movies
                 return Page();
             }
 
-            _context.Attach(Movie).State = EntityState.Modified;
+            _context.Attach(Theater).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +56,7 @@ namespace MovieApp.Pages.Movies
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MovieExists(Movie.Id))
+                if (!TheaterExists(Theater.TheaterId))
                 {
                     return NotFound();
                 }
@@ -68,9 +69,9 @@ namespace MovieApp.Pages.Movies
             return RedirectToPage("./Index");
         }
 
-        private bool MovieExists(int id)
+        private bool TheaterExists(int id)
         {
-            return _context.Movie.Any(e => e.Id == id);
+            return _context.Theater.Any(e => e.TheaterId == id);
         }
     }
 }
