@@ -19,11 +19,14 @@ namespace MovieApp.Pages.Theaters
             _context = context;
         }
 
-        public IList<Theater> Theater { get;set; }
+        public IList<Theater> Theaters { get;set; }
 
         public async Task OnGetAsync()
         {
-            Theater = await _context.Theater.ToListAsync();
+            Theaters = await _context.Theater
+                .Include(theater => theater.Movies)
+                .ToListAsync();
+
         }
     }
 }

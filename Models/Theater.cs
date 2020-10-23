@@ -12,6 +12,6 @@ namespace MovieApp.Models
         public string Street { get; set; }
         public string StreetNumber { get; set; }
         public string City { get; set; }
-        public ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

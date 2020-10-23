@@ -28,7 +28,9 @@ namespace MovieApp.Pages.Theaters
                 return NotFound();
             }
 
-            Theater = await _context.Theater.FirstOrDefaultAsync(m => m.TheaterId == id);
+            Theater = await _context.Theater
+                .Include(theater => theater.Movies)
+                .FirstOrDefaultAsync(m => m.TheaterId == id);
 
             if (Theater == null)
             {
