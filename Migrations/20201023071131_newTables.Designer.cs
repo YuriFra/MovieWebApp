@@ -9,7 +9,7 @@ using MovieApp.Data;
 namespace MovieApp.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20201022080147_newTables")]
+    [Migration("20201023071131_newTables")]
     partial class newTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,7 +36,7 @@ namespace MovieApp.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("TheaterId")
+                    b.Property<int>("TheaterId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -79,7 +79,8 @@ namespace MovieApp.Migrations
                     b.HasOne("MovieApp.Models.Theater", "Theater")
                         .WithMany("Movies")
                         .HasForeignKey("TheaterId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

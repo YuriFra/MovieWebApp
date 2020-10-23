@@ -27,6 +27,10 @@ namespace MovieApp.Models
         [StringLength(20, MinimumLength = 3)]
         [Required]
         public string Genre { get; set; }
-        public Theater Theater { get; set; }
+        
+        public int TheaterId { get; set; }
+        
+        [ForeignKey("TheaterId")]
+        public virtual Theater Theater { get; set; }
     }
 }

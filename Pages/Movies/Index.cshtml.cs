@@ -51,7 +51,9 @@ namespace MovieApp.Pages.Movies
                 movies = movies.Where(movie => movie.Genre == MovieGenre);
             }
             Genres = new SelectList(await genreQuery.Distinct().ToListAsync());
-            Movie = await movies.ToListAsync();
+            Movie = await movies
+                .Include(movie => movie.Theater)
+                .ToListAsync();
             Movie = Movie.OrderBy(name => name.Title).ToList();
         }
     }

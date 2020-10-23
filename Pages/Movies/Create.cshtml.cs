@@ -19,10 +19,11 @@ namespace MovieApp.Pages.Movies
         {
             _context = context;
         }
-        
-        public IActionResult OnGet()
-        { 
-            ViewData["TheaterList"] = new SelectList(_context.Theater, "TheaterId", "Name");
+
+        public IList<Theater> Theaters { get; set; }
+        public async Task<IActionResult> OnGetAsync()
+        {
+            Theaters = await _context.Theater.ToListAsync();
             
             return Page();
         }

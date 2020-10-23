@@ -28,7 +28,8 @@ namespace MovieApp.Pages.Movies
             {
                 return NotFound();
             }
-
+            
+            Theaters = await _context.Theater.ToListAsync();
             Movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Movie == null)

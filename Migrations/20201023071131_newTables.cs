@@ -34,7 +34,7 @@ namespace MovieApp.Migrations
                     ReleaseDate = table.Column<DateTime>(nullable: false),
                     Price = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
                     Genre = table.Column<string>(maxLength: 20, nullable: false),
-                    TheaterId = table.Column<int>(nullable: true)
+                    TheaterId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,7 +44,7 @@ namespace MovieApp.Migrations
                         column: x => x.TheaterId,
                         principalTable: "Theater",
                         principalColumn: "TheaterId",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
